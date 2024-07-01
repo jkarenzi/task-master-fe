@@ -1,22 +1,24 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { errorToast } from '../utils/toast';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.example.com',
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-axiosInstance.interceptors.request.use((request) => {
-  const token = useSelector((state: RootState) => state.user.token);
-  if (token) {
-    request.headers['Authorization'] = `Bearer ${token}`;
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if(!error.response){
+      errorToast('An unexpected error occured')
+    }
+
+    return Promise.reject(error)
   }
-  return request;
-});
+)
 
 export default axiosInstance;
