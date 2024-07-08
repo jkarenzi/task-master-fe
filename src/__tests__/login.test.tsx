@@ -80,7 +80,12 @@ describe('Login Component Tests', () => {
         const { user } = store.getState();
         expect(user).toEqual({
             token: null,
-            userInfo: null
+            userInfo: null,
+            imageStatus: "idle",
+            isLoadingImage: false,
+            isLoadingName: false,
+            isLoadingPassword: false,
+            status: "idle",
         })
     })
 
@@ -106,7 +111,12 @@ describe('Login Component Tests', () => {
                 createdAt: 'fakedate',
                 updatedAt: 'fakedate',
                 __v: 0
-            }
+            },
+            imageStatus: "idle",
+            isLoadingImage: false,
+            isLoadingName: false,
+            isLoadingPassword: false,
+            status: "idle",
         })
     })
 
@@ -132,12 +142,22 @@ describe('Login Component Tests', () => {
                 createdAt: 'fakedate',
                 updatedAt: 'fakedate',
                 __v: 0
-            }
+            },
+            imageStatus: "idle",
+            isLoadingImage: false,
+            isLoadingName: false,
+            isLoadingPassword: false,
+            status: "idle",
         })
         const loggedOutState = userReducer(undefined, {type:logout.type})
         expect(loggedOutState).toEqual({
             token: null,
-            userInfo: null
+            userInfo: null,
+            imageStatus: "idle",
+            isLoadingImage: false,
+            isLoadingName: false,
+            isLoadingPassword: false,
+            status: "idle",
         })
         
     })

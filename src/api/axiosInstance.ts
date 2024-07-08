@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { errorToast } from '../utils/toast';
 import store from '../redux/store';
 
 const axiosInstance = axios.create({
@@ -26,10 +25,10 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if(!error.response){
-      errorToast('An unexpected error occured')
+      return Promise.reject('Network Error')
     }
 
-    return Promise.reject(error)
+    return Promise.reject(error.response.data.message)
   }
 )
 

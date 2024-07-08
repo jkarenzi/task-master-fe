@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { screen, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import userReducer from '../redux/slices/userSlice'
+import userReducer, { InitUserState } from '../redux/slices/userSlice'
 import { Store, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import Drawer from '../components/Drawer';
@@ -57,8 +57,13 @@ describe('Drawer tests', () => {
                             publicId:'default',
                             url:'http://example.png'
                         }
-                    }
-                }
+                    },
+                    imageStatus: "idle",
+                    isLoadingImage: false,
+                    isLoadingName: false,
+                    isLoadingPassword: false,
+                    status: "idle",
+                } as InitUserState
             }})
         render(
             <Provider store={store}>
