@@ -12,6 +12,7 @@ import Signup from '../pages/auth/Signup';
 import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
 import EmailVerification from '../pages/auth/EmailVerification';
 import Email from '../pages/auth/Email';
+import StickyPage from '../pages/StickyPage';
 
 const Routes = () => {
   const router = createBrowserRouter(
@@ -25,6 +26,7 @@ const Routes = () => {
             <Route path='verify/:token' element={<EmailVerification/>}/>
             <Route path='email' element={<Email/>}/>
         </Route>
+        <Route path='notes' element={<StickyPage/>}/>
       </Route>
     )
   );

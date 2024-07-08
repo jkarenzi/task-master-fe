@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import { twoFactorSchema } from "../../validationSchema/authSchema";
@@ -22,6 +22,7 @@ const initialValues:formValues = {
 const TwoFactorAuth = () => {
     const [searchParams] = useSearchParams()
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const userId = searchParams.get('id')
     const email = searchParams.get('email')
 
@@ -30,6 +31,7 @@ const TwoFactorAuth = () => {
             const response = await axios.post(`/auth/verify_code/${userId}`, formData)
             setSubmitting(false)
             dispatch(login(response.data.token))
+            navigate('/notes')
         }catch(err){
             const error = err as AxiosError
             setSubmitting(false)

@@ -28,12 +28,12 @@ const Login = () => {
     const handleLogin = async(formData:formValues,{setSubmitting}:FormikHelpers<formValues>) => {
         try{
             const response = await axios.post('/auth/login', formData)
-            console.log(response.data)
             setSubmitting(false)
             if(!response.data.token){
                 navigate(`/auth/2fa?id=${response.data.data._id}&&email=${response.data.data.email}`)
             }else{
                 dispatch(login(response.data.token))
+                navigate('/notes')
             }           
         }catch(err){
             const error = err as AxiosError
