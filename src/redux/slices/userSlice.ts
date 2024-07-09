@@ -1,28 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { jwtDecode } from 'jwt-decode';
+import { User } from '../../types/types';
 
 
-interface User {
-  _id:string,
-  fullName: string,
-  email: string,
-  password: string,
-  role: string,
-  profileImg: {
-    publicId: string,
-    url?: string
-  },
-  isVerified: boolean,
-  twoFactorAuth: {
-      isEnabled: boolean,
-      code: number,
-  },
-  createdAt: string,
-  updatedAt: string,
-  __v: number 
-}
-
-export interface InitState {
+export interface InitUserState {
   token: string | null,
   userInfo: User | null
 }
@@ -42,7 +23,7 @@ if(tokenFromStorage){
   }
 }
 
-const initialState:InitState = {
+const initialState:InitUserState = {
   token: tokenFromStorage,
   userInfo: userFromToken,
 }
@@ -60,6 +41,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.token = null;
       state.userInfo = null;
+      localStorage.removeItem('token')
     },
   },
 });

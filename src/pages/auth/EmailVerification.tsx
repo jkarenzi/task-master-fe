@@ -38,8 +38,8 @@ const EmailVerification = () => {
                 <h1 className="text-custom-blue font-semibold text-2xl">TaskMaster</h1>
                 <div className="relative flex items-center justify-center bg-custom-blue w-28 h-28 rounded-full">
                     {verificationStatus === 'success'?
-                        <img src="/success.png" width='80' height='80' className="absolute left-8 top-0" alt="success"/>:
-                        <img src="/fail.png" width='80' height='80' alt="fail"/>
+                        <img src="/images/success.png" width='80' height='80' className="absolute left-8 top-0" alt="success"/>:
+                        <img src="/images/fail.png" width='80' height='80' alt="fail"/>
                     }
                 </div>
                 <p className="w-3/5 text-center">{verificationStatus === 'success'? message: message2}</p>
