@@ -7,8 +7,6 @@ import axios from '../../api/axiosInstance';
 import { login } from "../../redux/slices/userSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { errorToast } from "../../utils/toast";
-import { ApiResponse } from "../../types/types";
-import { AxiosError } from "axios";
 
 
 interface formValues {
@@ -36,9 +34,8 @@ const Login = () => {
                 navigate('/notes')
             }           
         }catch(err){
-            const error = err as AxiosError
             setSubmitting(false)
-            errorToast((error.response!.data as ApiResponse).message!)
+            errorToast(err as string)
         }
     }
 

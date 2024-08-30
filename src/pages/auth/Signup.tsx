@@ -5,8 +5,6 @@ import { signUpSchema } from "../../validationSchema/authSchema";
 import { FormikHelpers, useFormik } from "formik";
 import axios from "../../api/axiosInstance";
 import { errorToast } from "../../utils/toast";
-import { ApiResponse } from "../../types/types";
-import { AxiosError } from "axios";
 
 
 interface formValues {
@@ -31,9 +29,8 @@ const Signup = () => {
             setSubmitting(false)
             navigate(`/auth/email?email=${response.data.data.email}`)
         }catch(err){
-            const error = err as AxiosError
             setSubmitting(false)
-            errorToast((error.response!.data as ApiResponse).message!)
+            errorToast(err as string)
         }  
     }
 

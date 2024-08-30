@@ -21,7 +21,6 @@ export default {
           borderGrey: '#666666',
           drawerBorder: '#272727',
           drawerIconInactive: '#26292C'
-
         }
       },
       fontFamily:{

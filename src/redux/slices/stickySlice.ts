@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../api/axiosInstance";
-import { ApiResponse, IStickyNote } from "../../types/types";
-import { AxiosError } from "axios";
+import { IStickyNote } from "../../types/types";
 import { errorToast } from "../../utils/toast";
 
 
@@ -49,9 +48,7 @@ export const fetchStickyNotes = createAsyncThunk<IStickyNote[]>('stickyNotes/fet
         const response = await axios.get('/sticky_notes')
         return response.data.data as IStickyNote[]
     }catch(err){
-        const error = err as AxiosError
-        const errorMessage = (error.response!.data as ApiResponse).message!
-        return thunkAPI.rejectWithValue(errorMessage)
+        return thunkAPI.rejectWithValue(err)
     }
 })
 
@@ -60,9 +57,7 @@ export const createStickyNote = createAsyncThunk<IStickyNote, createStickyNoteFo
         const response = await axios.post('/sticky_notes', formData)
         return response.data.data as IStickyNote
     }catch(err){
-        const error = err as AxiosError
-        const errorMessage = (error.response!.data as ApiResponse).message!
-        return thunkAPI.rejectWithValue(errorMessage)
+        return thunkAPI.rejectWithValue(err)
     }
 })
 
@@ -71,9 +66,7 @@ export const updateStickyNote = createAsyncThunk<IStickyNote, updateData>('stick
         const response = await axios.patch(`/sticky_notes/${id}`, formData)
         return response.data.data as IStickyNote
     }catch(err){
-        const error = err as AxiosError
-        const errorMessage = (error.response!.data as ApiResponse).message!
-        return thunkAPI.rejectWithValue(errorMessage)
+        return thunkAPI.rejectWithValue(err)
     }
 })
 
@@ -82,9 +75,7 @@ export const deleteStickyNote = createAsyncThunk<string, string>('stickyNotes/de
         await axios.delete(`/sticky_notes/${noteId}`)
         return noteId
     }catch(err){
-        const error = err as AxiosError
-        const errorMessage:string = (error.response!.data as ApiResponse).message!
-        return thunkAPI.rejectWithValue(errorMessage)
+        return thunkAPI.rejectWithValue(err)
     }
 })
 
